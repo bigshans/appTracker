@@ -29,16 +29,28 @@ UsageStatsManager.queryEvents(...)
 
 因此后台耗电非常低。
 
-## 权限
+## 权限清单
 
-只需要 **使用情况访问（Usage Access）** 权限：
+应用实际申请/合并的权限：
 
-- 设置 → 使用情况访问 → 应用监控 → 允许
-- 或使用 Shizuku 一键授权（可选）
+| 权限 | 用途 |
+|---|---|
+| `PACKAGE_USAGE_STATS` | 读取系统 UsageStats，核心功能 |
+| `QUERY_ALL_PACKAGES` | 黑名单列表显示应用名称/图标 |
+| `RECEIVE_BOOT_COMPLETED` | 开机后恢复同步任务 |
+| `WAKE_LOCK` | WorkManager 执行短同步任务时短暂持有 |
+| `ACCESS_NETWORK_STATE` | WorkManager 库自带；应用无网络访问 |
+| Shizuku API 权限 | 仅在主动使用 Shizuku 授权时 |
 
-Android 16 上部分系统不允许通过 shell 修改该权限，此时应用会提示你手动去系统设置授权。
+明确**不申请**：
 
-Shizuku 只用于授权，不参与日常统计，不需要常驻运行。
+- 无障碍服务权限
+- `FOREGROUND_SERVICE`
+- `POST_NOTIFICATIONS`
+- `INTERNET`（应用没有联网权限）
+- 每秒轮询、前台服务、通知常驻
+
+使用情况访问可以通过系统设置或 Shizuku 一键授权；Android 16 上部分系统不允许 shell 修改该权限，此时会提示手动授权。
 
 ## 功能
 
@@ -133,8 +145,8 @@ keystore.properties
 当前正式版：
 
 ```text
-versionCode: 19
-versionName: 2.5.0
+versionCode: 20
+versionName: 2.5.1
 minSdk: 26
 targetSdk: 36
 ```
