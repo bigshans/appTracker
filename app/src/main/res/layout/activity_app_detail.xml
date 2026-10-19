@@ -195,16 +195,43 @@
                 app:tint="?attr/colorOnSurfaceVariant" />
         </LinearLayout>
 
-        <TextView
-            android:id="@+id/tv_timeline_title"
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:gravity="center_vertical"
+            android:orientation="horizontal"
             android:paddingStart="20dp"
             android:paddingTop="4dp"
-            android:paddingEnd="20dp"
-            android:text="@string/app_detail_timeline"
-            android:textAppearance="?attr/textAppearanceLabelLarge"
-            android:textColor="?attr/colorOnSurfaceVariant" />
+            android:paddingEnd="12dp">
+
+            <TextView
+                android:id="@+id/tv_timeline_title"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:layout_weight="1"
+                android:text="@string/app_detail_timeline"
+                android:textAppearance="?attr/textAppearanceLabelLarge"
+                android:textColor="?attr/colorOnSurfaceVariant" />
+
+            <com.google.android.material.chip.Chip
+                android:id="@+id/chip_time_filter"
+                style="@style/Widget.Material3.Chip.Assist"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:minHeight="32dp"
+                android:text="@string/time_filter_all"
+                android:textSize="12sp"
+                app:chipEndPadding="8dp"
+                app:chipIcon="@drawable/ic_filter"
+                app:chipIconTint="?attr/colorOnSurfaceVariant"
+                app:chipIconVisible="true"
+                app:chipMinHeight="32dp"
+                app:chipStartPadding="8dp"
+                app:closeIconTint="?attr/colorOnSurfaceVariant"
+                app:closeIconVisible="false"
+                app:iconEndPadding="4dp"
+                app:iconStartPadding="2dp" />
+        </LinearLayout>
 
         <FrameLayout
             android:layout_width="match_parent"

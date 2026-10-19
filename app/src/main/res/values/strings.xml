@@ -35,6 +35,19 @@
     <string name="history_today">今天</string>
     <string name="history_summary">%1$s · %2$d 个应用</string>
     <string name="history_empty">这一天没有使用记录</string>
+    <string name="time_filter_all">全部时段</string>
+    <string name="history_search_hint">搜索应用名</string>
+    <string name="history_empty_search">没有匹配的应用记录</string>
+    <string name="time_filter_title">按时间段查询</string>
+    <string name="time_filter_hint">只显示所选时间段内的前台记录</string>
+    <string name="time_filter_start">开始</string>
+    <string name="time_filter_end">结束</string>
+    <string name="time_filter_apply">应用</string>
+    <string name="time_filter_clear">清除</string>
+    <string name="time_filter_invalid">结束时间需晚于开始时间</string>
+    <string name="time_filter_range">%1$s – %2$s</string>
+    <string name="history_empty_time">该时间段内没有前台记录</string>
+
     <string name="history_empty_filtered">没有超过过滤阈值的时段\n可在设置 → 显示过滤中降低条件</string>
     <string name="history_live">进行中</string>
     <string name="session_open_close">打开 %1$s · 关闭 %2$s</string>
@@ -130,6 +143,7 @@
     <string name="app_detail_history">最近 14 天</string>
     <string name="app_detail_timeline">当日时间表</string>
     <string name="app_detail_day_empty">这一天没有该应用的前台时段</string>
+    <string name="app_detail_time_empty">该时间段内没有该应用的前台记录</string>
     <string name="app_detail_day_empty_filtered">没有超过过滤阈值的前台时段</string>
     <string name="history_timeline_hint">前台时间表</string>
     <string name="settings_sync_done">同步完成：%1$d 个应用</string>

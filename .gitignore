@@ -16,3 +16,6 @@ keystore/
 keystore.properties
 *.jks
 *.keystore
+
+# Local data backups
+backups/

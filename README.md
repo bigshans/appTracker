@@ -67,7 +67,7 @@ UsageStatsManager.queryEvents(...)
   - 顶部汇总当天总时长和应用数量
 - **应用详情**
   - 单个应用的日期切换（左右箭头 / 日期选择器）
-  - 选中日该应用的前台时间表（几点到几点、持续多久）
+  - 单个应用的前台时间表，支持按时间段过滤
   - 选中日时长、近 7 天总时长、日均
 - **时间表数据**
   - 由 UsageStats 事件重建，相邻同应用时段会自动合并
@@ -145,8 +145,8 @@ keystore.properties
 当前正式版：
 
 ```text
-versionCode: 20
-versionName: 2.5.1
+versionCode: 21
+versionName: 2.6.0
 minSdk: 26
 targetSdk: 36
 ```
