@@ -1,0 +1,168 @@
+<resources>
+    <string name="app_name">应用监控</string>
+    <string name="accessibility_service_label">应用监控 · 前台应用记录</string>
+    <string name="accessibility_service_summary">记录前台应用的打开、关闭与使用时长</string>
+    <string name="accessibility_service_description">用于识别当前位于前台的应用，并记录每次打开与关闭的时间。本服务不会读取屏幕内容，也不会收集文字、输入或任何个人数据。</string>
+
+    <string name="tab_overview">概览</string>
+    <string name="tab_history">记录</string>
+    <string name="tab_settings">设置</string>
+
+    <string name="permission_title">需要授予使用情况访问</string>
+    <string name="permission_desc">授权后读取系统统计的前台使用时长。应用无需常驻后台，系统会持续累计，几乎不耗电。</string>
+    <string name="permission_open">去授权</string>
+
+    <string name="current_usage">当前使用</string>
+    <string name="current_none">暂无活动应用</string>
+    <string name="current_running">监控运行中</string>
+    <string name="current_disabled">监控未开启</string>
+    <string name="current_waiting">切换到其他应用后会自动开始记录</string>
+    <string name="current_polling">正在后台监控</string>
+    <string name="current_polling_hint">用量轮询中 · 切换到其他应用后开始记录</string>
+    <string name="monitoring_paused">监控已暂停</string>
+    <string name="monitoring_paused_hint">继续监控后恢复记录</string>
+    <string name="pause_monitoring">暂停监控</string>
+    <string name="resume_monitoring">继续监控</string>
+    <string name="settings_paused">已暂停</string>
+
+    <string name="stat_today_duration">今日前台时长</string>
+    <string name="stat_today_launches">应用数量</string>
+    <string name="today_apps_title">今日应用</string>
+    <string name="today_empty">今天还没有记录\n开启监控并正常使用应用后，这里会显示统计</string>
+
+    <string name="history_title">使用记录</string>
+    <string name="history_today">今天</string>
+    <string name="history_summary">%1$s · %2$d 个应用</string>
+    <string name="history_empty">这一天没有使用记录</string>
+    <string name="history_live">进行中</string>
+    <string name="session_open_close">打开 %1$s · 关闭 %2$s</string>
+    <string name="session_open_live">打开 %1$s · 进行中</string>
+    <string name="session_duration">持续 %1$s</string>
+
+    <string name="app_detail_title">应用详情</string>
+    <string name="app_detail_total">选中日时长</string>
+    <string name="app_detail_launches">近 7 天</string>
+    <string name="app_detail_longest">日均</string>
+    <string name="app_detail_empty">最近 14 天没有该应用的使用记录</string>
+
+    <string name="notification_channel_name">后台监控</string>
+    <string name="notification_channel_desc">保持前台应用记录服务运行</string>
+    <string name="notification_title">应用监控正在记录</string>
+    <string name="notification_text">前台服务运行中，用于持续记录应用的打开与关闭</string>
+    <string name="notification_text_current">正在记录：%1$s</string>
+    <string name="notification_title_paused">应用监控已暂停</string>
+    <string name="notification_text_paused">暂停期间不会记录应用使用</string>
+    <string name="notification_action_pause">暂停</string>
+    <string name="notification_action_resume">继续</string>
+
+    <string name="settings_shizuku">Shizuku 模式（可选）</string>
+    <string name="settings_shizuku_desc">通过 Shizuku 一键授予“使用情况访问”权限，省去手动进入系统设置。</string>
+    <string name="settings_shizuku_not_installed">未安装</string>
+    <string name="settings_shizuku_not_running">未运行</string>
+    <string name="settings_shizuku_not_granted">未授权</string>
+    <string name="settings_shizuku_granted">已授权</string>
+    <string name="settings_shizuku_ready">已就绪</string>
+    <string name="settings_shizuku_hint_install">请先安装并启动 Shizuku</string>
+    <string name="settings_shizuku_hint_start">请先打开 Shizuku 并确认服务正在运行</string>
+    <string name="settings_shizuku_hint_grant">点击授权，允许应用通过 Shizuku 执行授权命令</string>
+    <string name="settings_shizuku_hint_usage">点击授予“使用情况访问”，之后即可同步系统统计</string>
+    <string name="settings_shizuku_hint_ready">使用情况访问已授权，数据会自动同步</string>
+    <string name="settings_shizuku_open">打开 Shizuku</string>
+    <string name="settings_shizuku_install">安装 Shizuku</string>
+    <string name="settings_shizuku_grant">授权 Shizuku</string>
+    <string name="settings_shizuku_grant_usage">授予用量访问</string>
+    <string name="settings_shizuku_busy">正在通过 Shizuku 授权…</string>
+    <string name="settings_shizuku_success">已授予使用情况访问</string>
+    <string name="settings_shizuku_failed">Shizuku 操作失败，请检查 Shizuku 是否在运行</string>
+    <string name="settings_shizuku_restricted_title">Shizuku 授权受限</string>
+    <string name="settings_shizuku_restricted_message">当前 Android 版本不允许通过 Shizuku 修改用量访问权限，请手动在系统设置中开启“使用情况访问”。</string>
+    <string name="settings_shizuku_enable_accessibility">启用无障碍</string>
+    <string name="settings_shizuku_enabling_accessibility">正在通过 Shizuku 启用无障碍…</string>
+    <string name="settings_shizuku_accessibility_success">已通过 Shizuku 启用无障碍服务</string>
+    <string name="settings_shizuku_hint_accessibility">Shizuku 已启用无障碍服务，记录正在运行</string>
+    <string name="settings_shizuku_needed">请先安装并启动 Shizuku</string>
+    <string name="settings_shizuku_request">请在 Shizuku 弹窗中允许授权</string>
+
+    <string name="settings_background">后台运行</string>
+    <string name="settings_background_desc">前台服务常驻通知，降低被系统回收的概率</string>
+    <string name="settings_running">运行中</string>
+    <string name="settings_not_running">未运行</string>
+    <string name="settings_starting">启动中</string>
+    <string name="settings_battery_ignore">忽略电池优化</string>
+    <string name="settings_battery_ignored">已忽略电池优化</string>
+    <string name="settings_background_hint">一加/ColorOS 还需在「耗电管理」中允许后台活动，并在最近任务中锁定本应用；否则划掉任务时系统仍可能杀掉前台服务。自启动权限本身不能阻止这种清理。</string>
+
+    <string name="permission_shizuku_hint">也可以用 Shizuku 授予用量访问，无需无障碍</string>
+    <string name="permission_shizuku">用 Shizuku 授权</string>
+    <string name="settings_permissions">监控权限</string>
+    <string name="settings_accessibility">无障碍服务</string>
+    <string name="settings_accessibility_desc">实时记录应用的打开与关闭（推荐）</string>
+    <string name="settings_usage_access">使用情况访问</string>
+    <string name="settings_usage_access_desc">读取系统统计的前台时长，无需后台常驻</string>
+    <string name="settings_enabled">已开启</string>
+    <string name="settings_disabled">未开启</string>
+    <string name="settings_grant">去授权</string>
+
+    <string name="settings_blacklist">应用过滤</string>
+    <string name="settings_blacklist_title">应用黑名单</string>
+    <string name="settings_blacklist_desc">黑名单中的应用不计入统计</string>
+    <string name="settings_blacklist_manage">管理黑名单</string>
+    <string name="settings_blacklist_count">已屏蔽 %1$d 个应用</string>
+    <string name="blacklist_title">应用黑名单</string>
+    <string name="blacklist_desc">勾选的应用将不再记录。已有记录会被隐藏，取消勾选后重新显示。</string>
+    <string name="blacklist_selected">已屏蔽 %1$d 个应用 · 共 %2$d 个应用</string>
+    <string name="blacklist_search_hint">搜索应用或包名</string>
+    <string name="blacklist_show_all">显示全部应用（含系统组件）</string>
+    <string name="blacklist_empty">没有匹配的应用</string>
+    <string name="blacklist_add">加入黑名单</string>
+    <string name="blacklist_remove">移出黑名单</string>
+    <string name="blacklist_added">已加入黑名单，历史记录已隐藏</string>
+    <string name="blacklist_removed">已移出黑名单</string>
+
+    <string name="usage_percent">占今日 %1$d%%</string>
+    <string name="sync_status">上次同步：%1$s</string>
+    <string name="sync_never">尚未同步</string>
+    <string name="sync_now">立即同步</string>
+    <string name="sync_syncing">正在同步…</string>
+    <string name="sync_done">同步完成</string>
+    <string name="app_detail_history">最近 14 天</string>
+    <string name="app_detail_timeline">当日时间表</string>
+    <string name="app_detail_day_empty">这一天没有该应用的前台时段</string>
+    <string name="history_timeline_hint">前台时间表</string>
+    <string name="settings_sync_done">同步完成：%1$d 个应用</string>
+    <string name="settings_sync_empty">暂无可用数据</string>
+    <string name="settings_sync_need_access">请先授予使用情况访问权限</string>
+    <string name="settings_sync_hint">系统首次最多提供约 7 天历史；应用打开时、开机时以及每 12 小时会自动同步，已同步的数据会一直保存在本地。</string>
+    <string name="settings_data">数据</string>
+    <string name="settings_import_1d">补录最近 1 天</string>
+    <string name="settings_import_7d">补录最近 7 天</string>
+    <string name="settings_import_hint">从系统 UsageStats 补录记录，只补充没有重叠的时间段。开启无障碍之前的空白可以用它填补。</string>
+    <string name="settings_export">导出 CSV</string>
+    <string name="settings_open_settings">去设置</string>
+    <string name="settings_clear">清空数据</string>
+    <string name="settings_clear_confirm">确定清空所有记录吗？此操作无法撤销。</string>
+    <string name="settings_clear_action">清空</string>
+    <string name="settings_cancel">取消</string>
+    <string name="settings_importing">正在导入…</string>
+    <string name="settings_exporting">正在导出…</string>
+    <string name="settings_import_done">已补录 %1$d 条记录</string>
+    <string name="settings_import_none">没有可补录的新记录</string>
+    <string name="settings_export_done">已导出 %1$d 条记录</string>
+    <string name="settings_need_usage">请先授予“使用情况访问”权限</string>
+    <string name="settings_import_failed">导入失败：%1$s</string>
+    <string name="settings_export_failed">导出失败：%1$s</string>
+    <string name="settings_export_empty">暂无可导出的记录</string>
+    <string name="settings_cleared">数据已清空</string>
+
+    <string name="settings_about">关于</string>
+    <string name="settings_about_text_unused">应用监控支持两种记录方式：\n\n1. 无障碍服务：实时监听窗口切换，精度最高。\n2. Shizuku / 使用情况访问：由前台服务轮询系统 UsageStats，无需无障碍也能后台记录。\n\n前台服务会显示常驻通知，尽量避免被系统回收；建议同时忽略电池优化，并在国产 ROM 中允许自启动和后台活动。\n\n所有数据仅保存在设备本地，不会上传网络。你可以随时导出 CSV 或清空数据。\n\n提示：桌面、本应用自身、输入法和系统界面不计入统计；息屏时当前会话会自动结束；短于 1 秒的切换会被忽略。</string>
+
+    <string name="settings_apps_count">已保存 %1$d 条时段记录</string>
+    <string name="date_prev">前一天</string>
+    <string name="date_next">后一天</string>
+    <string name="date_pick">选择日期</string>
+    <string name="percent">%1$s</string>
+    <string name="not_available">—</string>
+    <string name="back">返回</string>
+    <string name="settings_about_text">应用监控读取 Android 系统提供的 UsageStats 前台时长统计，按天保存各应用的使用时长。\n\n它不需要无障碍服务、不需要前台服务常驻，也不会每秒轮询，因此耗电非常低。即使应用关闭，系统仍会继续累计时长。\n\n所有数据仅保存在本机，不上传网络。你可以随时导出 CSV 或清空数据。\n\n说明：桌面、本应用自身、输入法和系统界面不计入统计；黑名单应用的数据会隐藏。</string>
+</resources>
