@@ -13,6 +13,7 @@ import dev.aerian.apptracker.data.SyncScheduler;
 import dev.aerian.apptracker.ui.HistoryFragment;
 import dev.aerian.apptracker.ui.OverviewFragment;
 import dev.aerian.apptracker.ui.SettingsFragment;
+import dev.aerian.apptracker.ui.StatsFragment;
 import dev.aerian.apptracker.util.WindowInsetsHelper;
 
 public class MainActivity extends AppCompatActivity {
@@ -61,6 +62,8 @@ public class MainActivity extends AppCompatActivity {
         Fragment fragment;
         if (itemId == R.id.nav_history) {
             fragment = new HistoryFragment();
+        } else if (itemId == R.id.nav_stats) {
+            fragment = new StatsFragment();
         } else if (itemId == R.id.nav_settings) {
             fragment = new SettingsFragment();
         } else {

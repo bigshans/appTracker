@@ -28,6 +28,7 @@ import java.util.concurrent.Executors;
 import dev.aerian.apptracker.MainActivity;
 import dev.aerian.apptracker.R;
 import dev.aerian.apptracker.data.AppUsage;
+import dev.aerian.apptracker.data.DisplayPrefs;
 import dev.aerian.apptracker.data.UsageStore;
 import dev.aerian.apptracker.data.UsageSync;
 import dev.aerian.apptracker.ui.adapter.AppStatAdapter;
@@ -49,6 +50,7 @@ public class OverviewFragment extends Fragment {
     private TextView lastSync;
     private RecyclerView appsRecycler;
     private TextView appsEmpty;
+    private TextView filterNote;
     private MaterialButton syncButton;
     private AppStatAdapter adapter;
 
@@ -77,6 +79,7 @@ public class OverviewFragment extends Fragment {
         lastSync = view.findViewById(R.id.tv_last_sync);
         appsRecycler = view.findViewById(R.id.rv_apps);
         appsEmpty = view.findViewById(R.id.tv_apps_empty);
+        filterNote = view.findViewById(R.id.tv_filter_note);
         syncButton = view.findViewById(R.id.btn_sync);
 
         MaterialButton openAccess = view.findViewById(R.id.btn_open_usage_access);
@@ -147,19 +150,24 @@ public class OverviewFragment extends Fragment {
                 total += item.durationMs;
             }
             final long totalDuration = total;
+            final long minDuration = DisplayPrefs.getMinDuration(appContext);
+            if (minDuration > 0) {
+                usage.removeIf(item -> item.durationMs < minDuration);
+            }
             final long lastSyncAt = UsageSync.getLastSync(appContext);
             mainHandler.post(() -> {
                 if (!isAdded() || getView() == null) {
                     return;
                 }
-                render(today, usage, totalDuration, lastSyncAt);
+                render(today, usage, totalDuration, lastSyncAt, minDuration);
                 syncButton.setEnabled(true);
                 syncButton.setText(R.string.sync_now);
             });
         });
     }
 
-    private void render(LocalDate today, List<AppUsage> usage, long totalDuration, long lastSyncAt) {
+    private void render(LocalDate today, List<AppUsage> usage, long totalDuration,
+                        long lastSyncAt, long minDuration) {
         todayTotal.setText(TimeUtils.formatDuration(totalDuration));
         todayApps.setText(String.valueOf(usage.size()));
         todayDate.setText(DateTimeFormatter.ofPattern("M月d日 EEEE", Locale.CHINA).format(today));
@@ -171,8 +179,20 @@ public class OverviewFragment extends Fragment {
                     : TimeUtils.formatDateTime(lastSyncAt);
             lastSync.setText(getString(R.string.sync_status, time));
         }
+        if (minDuration > 0) {
+            filterNote.setText(getString(R.string.filter_note,
+                    DisplayPrefs.label(minDuration)));
+            filterNote.setVisibility(View.VISIBLE);
+        } else {
+            filterNote.setVisibility(View.GONE);
+        }
         adapter.submit(usage, totalDuration);
         boolean empty = usage.isEmpty();
+        if (empty && minDuration > 0 && totalDuration > 0) {
+            appsEmpty.setText(R.string.today_empty_filtered);
+        } else {
+            appsEmpty.setText(R.string.today_empty);
+        }
         appsEmpty.setVisibility(empty ? View.VISIBLE : View.GONE);
         appsRecycler.setVisibility(empty ? View.GONE : View.VISIBLE);
     }

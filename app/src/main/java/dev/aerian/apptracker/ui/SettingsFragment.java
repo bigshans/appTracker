@@ -33,6 +33,7 @@ import java.util.concurrent.Executors;
 
 import dev.aerian.apptracker.R;
 import dev.aerian.apptracker.data.BlacklistStore;
+import dev.aerian.apptracker.data.DisplayPrefs;
 import dev.aerian.apptracker.data.UsageInterval;
 import dev.aerian.apptracker.data.UsageStore;
 import dev.aerian.apptracker.data.UsageSync;
@@ -55,6 +56,7 @@ public class SettingsFragment extends Fragment {
     private TextView sessionCount;
     private TextView lastSyncView;
     private TextView blacklistCount;
+    private TextView filterValue;
     private TextView progressLabel;
     private LinearProgressIndicator progress;
     private MaterialButton usageButton;
@@ -62,6 +64,7 @@ public class SettingsFragment extends Fragment {
     private MaterialButton syncButton;
     private MaterialButton exportButton;
     private MaterialButton clearButton;
+    private MaterialButton filterButton;
 
     private boolean busy;
 
@@ -104,6 +107,7 @@ public class SettingsFragment extends Fragment {
         sessionCount = view.findViewById(R.id.tv_session_count);
         lastSyncView = view.findViewById(R.id.tv_last_sync);
         blacklistCount = view.findViewById(R.id.tv_blacklist_count);
+        filterValue = view.findViewById(R.id.tv_filter_value);
         progress = view.findViewById(R.id.progress);
         progressLabel = view.findViewById(R.id.tv_progress_label);
         usageButton = view.findViewById(R.id.btn_usage_access);
@@ -111,6 +115,7 @@ public class SettingsFragment extends Fragment {
         syncButton = view.findViewById(R.id.btn_sync);
         exportButton = view.findViewById(R.id.btn_export);
         clearButton = view.findViewById(R.id.btn_clear);
+        filterButton = view.findViewById(R.id.btn_filter);
 
         try {
             Shizuku.addRequestPermissionResultListener(shizukuPermissionListener);
@@ -123,6 +128,7 @@ public class SettingsFragment extends Fragment {
         syncButton.setOnClickListener(v -> syncNow());
         exportButton.setOnClickListener(v -> exportCsv());
         clearButton.setOnClickListener(v -> confirmClear());
+        filterButton.setOnClickListener(v -> showFilterDialog());
         view.findViewById(R.id.btn_blacklist).setOnClickListener(v ->
                 startActivity(new Intent(requireContext(), BlacklistActivity.class)));
     }
@@ -134,6 +140,7 @@ public class SettingsFragment extends Fragment {
         updateCount();
         updateBlacklistCount();
         updateLastSync();
+        updateFilterUi();
     }
 
     @Override
@@ -321,6 +328,39 @@ public class SettingsFragment extends Fragment {
         });
     }
 
+    private void updateFilterUi() {
+        if (!isAdded() || getView() == null) {
+            return;
+        }
+        String label = DisplayPrefs.label(DisplayPrefs.getMinDuration(requireContext()));
+        filterValue.setText(getString(R.string.settings_filter_current, label));
+        filterButton.setText(getString(R.string.settings_filter_apply, label));
+    }
+
+    private void showFilterDialog() {
+        if (!isAdded()) {
+            return;
+        }
+        long current = DisplayPrefs.getMinDuration(requireContext());
+        CharSequence[] labels = new CharSequence[DisplayPrefs.OPTIONS.length];
+        int checked = 0;
+        for (int i = 0; i < DisplayPrefs.OPTIONS.length; i++) {
+            labels[i] = DisplayPrefs.label(DisplayPrefs.OPTIONS[i]);
+            if (DisplayPrefs.OPTIONS[i] == current) {
+                checked = i;
+            }
+        }
+        new MaterialAlertDialogBuilder(requireContext())
+                .setTitle(R.string.settings_filter_title)
+                .setSingleChoiceItems(labels, checked, (dialog, which) -> {
+                    DisplayPrefs.setMinDuration(requireContext(), DisplayPrefs.OPTIONS[which]);
+                    updateFilterUi();
+                    dialog.dismiss();
+                })
+                .setNegativeButton(R.string.settings_cancel, null)
+                .show();
+    }
+
     private void updateLastSync() {
         if (!isAdded() || getView() == null) {
             return;
@@ -473,6 +513,7 @@ public class SettingsFragment extends Fragment {
         exportButton.setEnabled(!value);
         clearButton.setEnabled(!value);
         shizukuButton.setEnabled(!value);
+        filterButton.setEnabled(!value);
         if (!value) {
             updatePermissionStatus();
         }

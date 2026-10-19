@@ -29,6 +29,7 @@ import java.util.concurrent.Executors;
 import dev.aerian.apptracker.R;
 import dev.aerian.apptracker.data.AppLabelResolver;
 import dev.aerian.apptracker.data.BlacklistStore;
+import dev.aerian.apptracker.data.DisplayPrefs;
 import dev.aerian.apptracker.data.DayUsage;
 import dev.aerian.apptracker.data.UsageInterval;
 import dev.aerian.apptracker.data.UsageStore;
@@ -208,6 +209,10 @@ public class AppDetailActivity extends AppCompatActivity {
             for (UsageInterval item : intervals) {
                 selectedTotal += item.durationMs();
             }
+            long minDuration = DisplayPrefs.getMinDuration(appContext);
+            if (minDuration > 0) {
+                intervals.removeIf(item -> item.durationMs() < minDuration);
+            }
 
             final long selectedValue = selectedTotal;
             final long last7Value = last7Total;
@@ -222,6 +227,11 @@ public class AppDetailActivity extends AppCompatActivity {
                 averageView.setText(TimeUtils.formatDuration(averageValue));
                 adapter.submit(rows);
                 boolean empty = rows.isEmpty();
+                if (empty && selectedValue > 0) {
+                    emptyView.setText(R.string.app_detail_day_empty_filtered);
+                } else {
+                    emptyView.setText(R.string.app_detail_day_empty);
+                }
                 emptyView.setVisibility(empty ? android.view.View.VISIBLE : android.view.View.GONE);
                 recycler.setVisibility(empty ? android.view.View.GONE : android.view.View.VISIBLE);
             });

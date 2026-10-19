@@ -19,13 +19,16 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.time.LocalDate;
 import java.time.format.DateTimeFormatter;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 import java.util.Locale;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
 import dev.aerian.apptracker.R;
 import dev.aerian.apptracker.data.AppUsage;
+import dev.aerian.apptracker.data.DisplayPrefs;
 import dev.aerian.apptracker.data.UsageInterval;
 import dev.aerian.apptracker.data.UsageStore;
 import dev.aerian.apptracker.data.UsageSync;
@@ -160,15 +163,34 @@ public class HistoryFragment extends Fragment {
                 total += item.durationMs;
             }
             final long totalDuration = total;
+            final long minDuration = DisplayPrefs.getMinDuration(appContext);
+            if (minDuration > 0) {
+                intervals.removeIf(item -> item.durationMs() < minDuration);
+            }
+            Set<String> visiblePackages = new HashSet<>();
+            for (UsageInterval item : intervals) {
+                visiblePackages.add(item.packageName);
+            }
+            final int visibleApps = visiblePackages.size();
             final List<UsageInterval> rows = intervals;
             mainHandler.post(() -> {
                 if (!isAdded() || getView() == null) {
                     return;
                 }
                 adapter.submit(rows);
-                summaryView.setText(getString(R.string.history_summary,
-                        TimeUtils.formatDuration(totalDuration), usage.size()));
+                String summary = getString(R.string.history_summary,
+                        TimeUtils.formatDuration(totalDuration), visibleApps);
+                if (minDuration > 0) {
+                    summary += " · " + getString(R.string.filter_note,
+                            DisplayPrefs.label(minDuration));
+                }
+                summaryView.setText(summary);
                 boolean empty = rows.isEmpty();
+                if (empty && minDuration > 0 && totalDuration > 0) {
+                    emptyView.setText(R.string.history_empty_filtered);
+                } else {
+                    emptyView.setText(R.string.history_empty);
+                }
                 emptyView.setVisibility(empty ? View.VISIBLE : View.GONE);
                 recycler.setVisibility(empty ? View.GONE : View.VISIBLE);
             });

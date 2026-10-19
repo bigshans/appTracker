@@ -27,13 +27,19 @@ public class AppStatAdapter extends RecyclerView.Adapter<AppStatAdapter.Holder> 
 
     private final AppIconLoader iconLoader;
     private final Listener listener;
+    private final int percentFormatRes;
     private final List<AppUsage> items = new ArrayList<>();
     private long maxDuration = 1L;
     private long totalDuration = 1L;
 
     public AppStatAdapter(AppIconLoader iconLoader, Listener listener) {
+        this(iconLoader, listener, R.string.usage_percent);
+    }
+
+    public AppStatAdapter(AppIconLoader iconLoader, Listener listener, int percentFormatRes) {
         this.iconLoader = iconLoader;
         this.listener = listener;
+        this.percentFormatRes = percentFormatRes;
     }
 
     public void submit(List<AppUsage> usage, long total) {
@@ -60,7 +66,7 @@ public class AppStatAdapter extends RecyclerView.Adapter<AppStatAdapter.Holder> 
         holder.duration.setText(TimeUtils.formatCompact(usage.durationMs));
         int percent = (int) Math.min(100L, Math.round(usage.durationMs * 100.0 / totalDuration));
         holder.subtitle.setText(holder.itemView.getContext().getString(
-                R.string.usage_percent, percent));
+                percentFormatRes, percent));
         int progress = (int) Math.min(1000L, usage.durationMs * 1000L / maxDuration);
         holder.progress.setProgressCompat(progress, false);
         holder.itemView.setOnClickListener(v -> {

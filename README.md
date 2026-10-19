@@ -60,6 +60,15 @@ Shizuku 只用于授权，不参与日常统计，不需要常驻运行。
 - **时间表数据**
   - 由 UsageStats 事件重建，相邻同应用时段会自动合并
   - CSV 导出包含日期、开始时间、结束时间、应用、包名、时长
+- **统计页**
+  - 查询范围：最近 7 / 14 / 30 天，或自定义日期范围（最多 90 天）
+  - 总时长、日均、应用数、活跃天数
+  - 每日前台时长柱状图
+  - 区间内应用排行和占比
+- **显示过滤**
+  - 默认隐藏短于 5 秒的时段/应用排行
+  - 可选：不隐藏、5 秒、10 秒、30 秒、1 分钟、3 分钟
+  - 只影响显示，原始数据仍保留
 - **应用黑名单**
   - 支持搜索应用名/包名
   - 支持显示全部系统组件
@@ -79,6 +88,7 @@ Shizuku 只用于授权，不参与日常统计，不需要常驻运行。
 - 同一应用同一天多次使用会累计
 - 跨午夜的会话会按实际重叠时间拆分到两天
 - 单个应用当天时长低于 1 秒的零碎使用会被忽略
+- 默认显示过滤阈值为 5 秒，可在设置中调整；过滤只影响界面和排行，不删除数据
 - 时间表会将同一应用、间隔不超过 5 秒的相邻时段合并，减少 Activity 切换造成的碎片
 
 ## 构建
@@ -123,8 +133,8 @@ keystore.properties
 当前正式版：
 
 ```text
-versionCode: 18
-versionName: 2.4.0
+versionCode: 19
+versionName: 2.5.0
 minSdk: 26
 targetSdk: 36
 ```
@@ -139,6 +149,8 @@ app/src/main/java/dev/aerian/apptracker/
 │   ├── UsageSyncWorker.java          每天一次的后台同步
 │   ├── UsageStore.java               每日时长 + 前台时段 SQLite 存储
 │   ├── UsageInterval.java           前台时段模型
+│   ├── DisplayPrefs.java            显示过滤阈值
+│   ├── DailyTotal.java              每日总时长（图表）
 │   ├── AppUsage.java / DayUsage.java 数据模型
 │   ├── BlacklistStore.java           黑名单持久化
 │   └── AppLabelResolver.java         应用名称缓存
@@ -146,9 +158,11 @@ app/src/main/java/dev/aerian/apptracker/
 │   ├── OverviewFragment.java         今日概览
 │   ├── HistoryFragment.java          按天查看应用时长
 │   ├── AppDetailActivity.java        单应用最近 14 天
-│   ├── SettingsFragment.java         权限、同步、导出、黑名单入口
+│   ├── StatsFragment.java            范围统计、柱状图、应用排行
+│   ├── SettingsFragment.java         权限、同步、过滤、导出、黑名单入口
 │   ├── BlacklistActivity.java        黑名单管理
-│   └── adapter/                      应用排行 / 时间表 / 每日历史适配器
+│   ├── view/DailyBarChartView.java   每日时长柱状图
+│   └── adapter/                      应用排行 / 时间表适配器
 └── util/
     ├── AppUtils.java                 使用情况访问权限、应用分类
     ├── HomePackages.java             所有 Launcher 排除

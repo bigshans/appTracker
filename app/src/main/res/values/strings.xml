@@ -29,11 +29,13 @@
     <string name="stat_today_launches">应用数量</string>
     <string name="today_apps_title">今日应用</string>
     <string name="today_empty">今天还没有记录\n开启监控并正常使用应用后，这里会显示统计</string>
+    <string name="today_empty_filtered">没有超过过滤阈值的应用\n可在设置 → 显示过滤中降低条件</string>
 
     <string name="history_title">使用记录</string>
     <string name="history_today">今天</string>
     <string name="history_summary">%1$s · %2$d 个应用</string>
     <string name="history_empty">这一天没有使用记录</string>
+    <string name="history_empty_filtered">没有超过过滤阈值的时段\n可在设置 → 显示过滤中降低条件</string>
     <string name="history_live">进行中</string>
     <string name="session_open_close">打开 %1$s · 关闭 %2$s</string>
     <string name="session_open_live">打开 %1$s · 进行中</string>
@@ -128,11 +130,39 @@
     <string name="app_detail_history">最近 14 天</string>
     <string name="app_detail_timeline">当日时间表</string>
     <string name="app_detail_day_empty">这一天没有该应用的前台时段</string>
+    <string name="app_detail_day_empty_filtered">没有超过过滤阈值的前台时段</string>
     <string name="history_timeline_hint">前台时间表</string>
     <string name="settings_sync_done">同步完成：%1$d 个应用</string>
     <string name="settings_sync_empty">暂无可用数据</string>
     <string name="settings_sync_need_access">请先授予使用情况访问权限</string>
     <string name="settings_sync_hint">系统首次最多提供约 7 天历史；应用打开时、开机时以及每 12 小时会自动同步，已同步的数据会一直保存在本地。</string>
+    <string name="settings_filter">显示过滤</string>
+    <string name="settings_filter_title">短时段过滤</string>
+    <string name="settings_filter_desc">时间表和排行中隐藏短于该值的记录，原始数据仍保留</string>
+    <string name="settings_filter_current">当前：%1$s</string>
+    <string name="settings_filter_apply">过滤：%1$s</string>
+    <string name="filter_note">已隐藏 &lt; %1$s</string>
+    <string name="usage_percent_range">占区间 %1$d%%</string>
+
+    <string name="tab_stats">统计</string>
+    <string name="stats_range">统计范围</string>
+    <string name="stats_7_days">7 天</string>
+    <string name="stats_14_days">14 天</string>
+    <string name="stats_30_days">30 天</string>
+    <string name="stats_custom">自定义</string>
+    <string name="stats_total">总时长</string>
+    <string name="stats_daily_avg">日均</string>
+    <string name="stats_apps">应用数</string>
+    <string name="stats_active_days">活跃天数</string>
+    <string name="stats_chart_title">每日前台时长</string>
+    <string name="stats_peak">最高 %1$s</string>
+    <string name="stats_app_ranking">应用排行</string>
+    <string name="stats_active_days_value">%1$d / %2$d 天</string>
+    <string name="stats_empty">这个时间范围内没有使用记录</string>
+    <string name="stats_empty_filtered">没有超过过滤阈值的应用，可在设置中降低过滤条件</string>
+    <string name="stats_range_limited">最多查询 90 天</string>
+    <string name="stats_range_label">%1$s – %2$s</string>
+
     <string name="settings_data">数据</string>
     <string name="settings_import_1d">补录最近 1 天</string>
     <string name="settings_import_7d">补录最近 7 天</string>
